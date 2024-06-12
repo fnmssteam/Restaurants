@@ -1,0 +1,25 @@
+@RestaurantsAPI_HostAddress = https://localhost:7090
+
+GET {{RestaurantsAPI_HostAddress}}/weatherforecast/{take}/currentDay?max=0
+
+###
+
+POST {{RestaurantsAPI_HostAddress}}/weatherforecast/generate?take=5
+Content-Type: application/json
+
+{
+  "minTemp": -10,
+  "maxTemp": 33
+}
+
+###
+
+POST {{RestaurantsAPI_HostAddress}}/weatherforecast/generate?take=5
+Content-Type: application/json
+
+{
+  "minTemp": -10,
+  "maxTemp": -33
+}
+
+###
