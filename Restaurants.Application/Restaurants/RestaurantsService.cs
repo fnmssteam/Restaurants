@@ -35,6 +35,6 @@ internal class RestaurantsService(IRestaurantRepository restaurantsRepository, I
 
 		var r = mapper.Map<Restaurant>(dto);
 
-		restaurantsRepository.Create(r);
+		return restaurantsRepository.Create(r);
 	}
 }
