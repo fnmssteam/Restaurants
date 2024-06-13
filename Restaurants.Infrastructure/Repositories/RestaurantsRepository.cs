@@ -6,6 +6,16 @@ using Restaurants.Infrastructure.Persistence;
 namespace Restaurants.Infrastructure.Repositories;
 internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurantRepository
 {
+	public async Task<int> Create(Restaurant restaurant)
+	{
+		dbContext.Restaurants.Add(restaurant);
+
+		await dbContext.SaveChangesAsync();
+
+		// EF will automatically set the Id property of the restaurant
+		return restaurant.Id;
+	}
+
 	public async Task<IEnumerable<Restaurant>> GetAllAsync()
 	{
 		var restaurants = await dbContext.Restaurants.ToListAsync();
