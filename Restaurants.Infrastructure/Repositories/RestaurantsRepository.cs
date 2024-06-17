@@ -4,7 +4,7 @@ using Restaurants.Domain.Repositories;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Repositories;
-internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurantRepository
+internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurantsRepository
 {
 	public async Task<int> Create(Restaurant restaurant)
 	{
@@ -14,6 +14,13 @@ internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaura
 
 		// EF will automatically set the Id property of the restaurant
 		return restaurant.Id;
+	}
+
+	public async Task Delete(Restaurant restaurant)
+	{
+		dbContext.Remove(restaurant);
+
+		await dbContext.SaveChangesAsync();
 	}
 
 	public async Task<IEnumerable<Restaurant>> GetAllAsync()
@@ -31,4 +38,7 @@ internal class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaura
 
 		return restaurant;
 	}
+
+	public async Task SaveChanges() =>
+		await dbContext.SaveChangesAsync();
 }

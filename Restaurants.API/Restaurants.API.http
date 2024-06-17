@@ -5,7 +5,11 @@ GET {{RestaurantsAPI_HostAddress}}/api/restaurants
 
 ###
 
-GET {{RestaurantsAPI_HostAddress}}/api/restaurants/1
+GET {{RestaurantsAPI_HostAddress}}/api/restaurants/2
+
+###
+
+DELETE {{RestaurantsAPI_HostAddress}}/api/restaurants/1
 
 ###
 
@@ -22,6 +26,17 @@ Content-Type: application/json
   "City": "Metropolis",
   "Street": "456 Gourmet Avenue",
   "PostalCode": "54321"
+}
+
+###
+
+PATCH {{RestaurantsAPI_HostAddress}}/api/restaurants/1
+Content-Type: application/json
+
+{
+  "Name": "Bla",
+  "Description": "Blabla",
+  "HasDelivery": false
 }
 
 ###
