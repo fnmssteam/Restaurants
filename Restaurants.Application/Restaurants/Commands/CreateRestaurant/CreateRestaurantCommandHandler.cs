@@ -9,7 +9,8 @@ public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandl
 {
 	public Task<int> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
 	{
-		logger.LogInformation("Creating a new restaurant.");
+		// Log the serialized version of the request, labelled as Restaurant
+		logger.LogInformation("Creating a new restaurant {@Restaurant}.", request);
 
 		var r = mapper.Map<Restaurant>(request);
 

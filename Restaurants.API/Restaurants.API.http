@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-PATCH {{RestaurantsAPI_HostAddress}}/api/restaurants/1
+PATCH {{RestaurantsAPI_HostAddress}}/api/restaurants/2
 Content-Type: application/json
 
 {
