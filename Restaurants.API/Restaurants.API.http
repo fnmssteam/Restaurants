@@ -45,9 +45,9 @@ POST {{RestaurantsAPI_HostAddress}}/api/restaurants/2/dishes
 Content-Type: application/json
 
 {
-  "Name": "dish 1",
-  "Description": "dish 1 description",
-  "Price": -1,
+  "Name": "dish 2",
+  "Description": "dish 2 description",
+  "Price": 1,
   "KiloCalories": 2
 }
 
