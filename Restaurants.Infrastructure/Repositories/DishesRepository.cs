@@ -14,4 +14,11 @@ internal class DishesRepository(RestaurantsDbContext dbContext) : IDishesReposit
 		// EF will automatically set the Id property of the Dish
 		return dish.Id;
 	}
+
+	public async Task Delete(IEnumerable<Dish> dishes)
+	{
+		dbContext.Dishes.RemoveRange(dishes);
+
+		await dbContext.SaveChangesAsync();
+	}
 }
