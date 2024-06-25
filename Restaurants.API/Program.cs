@@ -1,5 +1,7 @@
+using Microsoft.OpenApi.Models;
 using Restaurants.API.Middlewares;
 using Restaurants.Application.Extensions;
+using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
 using Serilog;
@@ -9,7 +11,31 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+	// Add security definition for the bearer token in Swagger
+	c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+	{
+		Type = SecuritySchemeType.Http,
+		Scheme = "Bearer"
+	});
+
+	// Inject the token to each requests in Swagger
+	c.AddSecurityRequirement(new OpenApiSecurityRequirement
+	{
+		{
+			new OpenApiSecurityScheme
+			{
+				Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth"}
+			},
+			[]
+		}
+	});
+});
+
+// Exposes Identity endpoints on Swagger
+builder.Services.AddEndpointsApiExplorer();
+
 
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
@@ -40,6 +66,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Register, login, etc.
+app
+	.MapGroup("api/identity") // Add a prefix to Identity routes
+	.MapIdentityApi<User>();
 
 app.UseAuthorization();
 
