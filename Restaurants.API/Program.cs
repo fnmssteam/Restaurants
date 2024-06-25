@@ -39,6 +39,7 @@ app.UseHttpsRedirection();
 // Register, login, etc.
 app
 	.MapGroup("api/identity") // Add a prefix to Identity routes
+	.WithTags("Identity") // Place the endpoints under the Identity section
 	.MapIdentityApi<User>();
 
 app.UseAuthorization();
